@@ -1,4 +1,4 @@
-import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,os
+import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,os,fitz
 from PIL import Image
 
 class MultiFileTranslator:
@@ -62,7 +62,13 @@ class MultiFileTranslator:
 
             # Execute the REST API call and get the response.
 
-            splitfilelist = self.parse_tif(fileNameInput)
+            splitfilelist = []
+            if(fileNameInput.endswith('.tif')):
+                splitfilelist = self.parse_tif(fileNameInput)
+
+            if (fileNameInput.endswith('.pdf')):
+                splitfilelist = self.splitPdfToPNG(fileNameInput)
+
             millis = int(round(time.time() * 1000))
             ocrrecognizedfileName=fileNameInput.replace(".","_")+str(millis)+"_ocrtext.doc"
 
@@ -106,12 +112,14 @@ class MultiFileTranslator:
                 print("Number of lines %s" %len(lines))
                 for words in lines:
                     print(words["text"])
-                    ocrrecognizedfile.write(words["text"])
-                    ocrrecognizedfile.write('\n')
-                    translatedtText=self.translatetext(words["text"])
-                    translatedfile.write(translatedtText)
-                    translatedfile.write('\n')
-                    print('-----------English translation is %s' %translatedtText)
+                    if not words["text"] is None:
+                        ocrrecognizedfile.write(words["text"])
+                        ocrrecognizedfile.write('\n')
+                        translatedtText=self.translatetext(words["text"])
+                        if not translatedtText is None:
+                            translatedfile.write(translatedtText)
+                            translatedfile.write('\n')
+                            print('-----------English translation is %s' %translatedtText)
 
 
         except Exception as e:
@@ -149,6 +157,26 @@ class MultiFileTranslator:
                 break;
         return filelist;
 
+    def splitPdfToPNG(self,argv):
+        doc = fitz.open(argv)
+
+
+        file, ext = os.path.splitext(argv)
+        filelist = []
+        for i in range(len(doc)):
+            for img in doc.getPageImageList(i):
+                xref = img[0]
+                pix = fitz.Pixmap(doc, xref)
+                if pix.n < 5:       # this is GRAY or RGB
+                    pix.writePNG(file+"p%s-%s.png" % (i, xref))
+                    filelist.append(file+"p%s-%s.png" % (i, xref))
+                else:               # CMYK: convert to RGB first
+                    pix1 = fitz.Pixmap(fitz.csRGB, pix)
+                    pix1.writePNG(file+"p%s-%s.png" % (i, xref))
+                    filelist.append(file+"p%s-%s.png" % (i, xref))
+                    pix1 = None
+                pix = None
+        return filelist;
 
         #for i in range (numFramesPerTif)
         #    try:

@@ -102,12 +102,14 @@ class SingleFileTranslator:
             print("Number of lines %s" %len(lines))
             for words in lines:
                 print(words["text"])
-                ocrrecognizedfile.write(words["text"])
-                ocrrecognizedfile.write('\n')
-                translatedtText=self.translatetext(words["text"])
-                translatedfile.write(translatedtText)
-                translatedfile.write('\n')
-                print('-----------English translation is %s' %translatedtText)
+                if not words["text"] is None:
+                    ocrrecognizedfile.write(words["text"])
+                    ocrrecognizedfile.write('\n')
+                    translatedtText=self.translatetext(words["text"])
+                    if not translatedtText is None:
+                        translatedfile.write(translatedtText)
+                        translatedfile.write('\n')
+                        print('-----------English translation is %s' %translatedtText)
 
 
         except Exception as e:

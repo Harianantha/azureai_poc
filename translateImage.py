@@ -1,5 +1,6 @@
 from  MultiFileTranslator import MultiFileTranslator
 from SingleFileTranslator import SingleFileTranslator
+import os
 
 def main(argv):
     #translator = MultiFileTranslator()
@@ -9,6 +10,12 @@ def main(argv):
         translator = MultiFileTranslator()
         translator.translateFile(fileName)
     #PDF, DOCX,JPEG/PNG
+    elif (fileName. endswith ('.docx')):
+        command ='C:\Techolution\IOTPractise\CustomerProjects\Axa\DocumentTranslator\executeDocumentTranslator.bat '+fileName
+        output = os.system(command)
+        if (output == 0):
+            outputfilename=fileName.replace(".docx",".en.docx")
+            print ('output file of document translator %s'%outputfilename)
     else:
         translator = SingleFileTranslator()
         translator.translateFile(fileName)

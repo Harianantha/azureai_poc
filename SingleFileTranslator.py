@@ -1,5 +1,6 @@
 import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,time
 from  PageVal import PageVal
+from CreatePDFFile import CreatePDFFile
 class SingleFileTranslator:
     ###############################################
     #### Update or verify the following values. ###
@@ -62,7 +63,7 @@ class SingleFileTranslator:
 
             ocrrecognizedfileName=argv.replace(".","_")+str(millis)+"_ocrtext.doc"
 
-            translatedfileName=argv.replace(".","_")+str(millis)+"_engtranslation.doc"
+            translatedfileName=argv.replace(".","_")+str(millis)+"_engtranslation.pdf"
 
             ocrrecognizedfile=open(ocrrecognizedfileName,'a')
             translatedfile=open(translatedfileName,'a')
@@ -109,12 +110,18 @@ class SingleFileTranslator:
                     ocrrecognizedfile.write('\n')
                     translatedtText=self.translatetext(words["text"])
                     if not translatedtText is None:
-                        translatedfile.write(translatedtText)
-                        translatedfile.write('\n')
+                        #translatedfile.write(translatedtText)
+                        #translatedfile.write('\n')
                         pageVal.createOrAddToPageRow(words,translatedtText)
                         print('-----------English translation is %s' %translatedtText)
             print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
             pageVal.printValues()
+            pagevallist = []
+            pagevallist.append(pageVal)
+            createPdf= CreatePDFFile()
+            createPdf.createTranslatedPDF(pagevallist,translatedfileName)
+
+            return translatedfileName
 
 
         except Exception as e:

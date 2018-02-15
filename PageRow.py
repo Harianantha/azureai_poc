@@ -5,6 +5,8 @@ class PageRow:
         self.azureLineResults = []
         self.minY = 0
         self.maxY = 0
+        self.lineEnd= 0
+        self.lineStart = 0
 
     #azureLineResults = []
     #minY = 0
@@ -14,6 +16,33 @@ class PageRow:
             lineval = AzureLineResult(azureLineResult["boundingBox"],azureLineResult["text"],translatedText)
             #print('After creating lineval')
             self.azureLineResults.append(lineval)
+
+            if(self.lineEnd== 0):
+
+                self.lineEnd=azureLineResult["boundingBox"][2]
+                if (azureLineResult["boundingBox"][4] > self.lineEnd ):
+                    self.lineEnd= azureLineResult["boundingBox"][4]
+            else:
+                if (azureLineResult["boundingBox"][2] > self.lineEnd ):
+                    self.lineEnd= azureLineResult["boundingBox"][2]
+                if (azureLineResult["boundingBox"][4] > self.lineEnd ):
+                    self.lineEnd= azureLineResult["boundingBox"][4]
+
+            if(self.lineStart== 0):
+
+                self.lineStart=azureLineResult["boundingBox"][0]
+                if (azureLineResult["boundingBox"][6] < self.lineStart ):
+                    self.lineStart= azureLineResult["boundingBox"][6]
+            else:
+                if (azureLineResult["boundingBox"][0] < self.lineStart ):
+                    self.lineStart= azureLineResult["boundingBox"][0]
+                if (azureLineResult["boundingBox"][6] < self.lineStart ):
+                    self.lineStart= azureLineResult["boundingBox"][6]
+
+
+            if(self.minY == 0):
+                self.minY = azureLineResult["boundingBox"][1]
+
             if(azureLineResult["boundingBox"][1] < self.minY):
                 self.minY = azureLineResult["boundingBox"][1]
             if(azureLineResult["boundingBox"][3] < self.minY):

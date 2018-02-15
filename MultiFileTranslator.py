@@ -1,5 +1,7 @@
 import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,os,fitz
 from PIL import Image
+from  PageVal import PageVal
+from CreatePDFFile import CreatePDFFile
 
 class MultiFileTranslator:
     ###############################################
@@ -72,15 +74,15 @@ class MultiFileTranslator:
             millis = int(round(time.time() * 1000))
             ocrrecognizedfileName=fileNameInput.replace(".","_")+str(millis)+"_ocrtext.doc"
 
-            translatedfileName=fileNameInput.replace(".","_")+str(millis)+"_engtranslation.doc"
+            translatedfileName=fileNameInput.replace(".","_")+str(millis)+"_engtranslation.pdf"
 
             ocrrecognizedfile=open(ocrrecognizedfileName,'a')
             translatedfile=open(translatedfileName,'a')
 
-
+            pagevallist = []
             print("After splitting the file")
             for filename in splitfilelist:
-
+                pageVal = PageVal()
                 print("Before opening the file %s" %filename)
                 image = open(filename,'rb').read() # Read image file in binary mode
                 print("After opening the file")
@@ -117,9 +119,14 @@ class MultiFileTranslator:
                         ocrrecognizedfile.write('\n')
                         translatedtText=self.translatetext(words["text"])
                         if not translatedtText is None:
-                            translatedfile.write(translatedtText)
-                            translatedfile.write('\n')
+                            #translatedfile.write(translatedtText)
+                            #translatedfile.write('\n')
+                            pageVal.createOrAddToPageRow(words,translatedtText)
                             print('-----------English translation is %s' %translatedtText)
+                pagevallist.append(pageVal)
+            createPdf= CreatePDFFile()
+            createPdf.createTranslatedPDF(pagevallist,translatedfileName)
+            return translatedfileName
 
 
         except Exception as e:

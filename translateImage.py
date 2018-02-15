@@ -8,7 +8,8 @@ def main(argv):
 
     if(fileName. endswith ('.tiff') or fileName. endswith ('.tif' ) or fileName.endswith ('.pdf' ) or fileName.endswith ('.PDF' ) ):
         translator = MultiFileTranslator()
-        translator.translateFile(fileName)
+        outputfile=translator.translateFile(fileName)
+        print('Access translated file at %s'%outputfile)
     #PDF, DOCX,JPEG/PNG
     elif (fileName. endswith ('.docx')):
         command ='C:\Techolution\IOTPractise\CustomerProjects\Axa\DocumentTranslator\executeDocumentTranslator.bat '+fileName
@@ -18,7 +19,8 @@ def main(argv):
             print ('output file of document translator %s'%outputfilename)
     else:
         translator = SingleFileTranslator()
-        translator.translateFile(fileName)
+        outputfile=translator.translateFile(fileName)
+        print('Access translated file at %s'%outputfile)
 
 
 

@@ -1,5 +1,5 @@
 import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,time
-
+from  PageVal import PageVal
 class SingleFileTranslator:
     ###############################################
     #### Update or verify the following values. ###
@@ -100,7 +100,9 @@ class SingleFileTranslator:
             print (json.dumps(parsed, sort_keys=True, indent=2))
             lines=parsed["recognitionResult"]["lines"]
             print("Number of lines %s" %len(lines))
+            pageVal = PageVal()
             for words in lines:
+
                 print(words["text"])
                 if not words["text"] is None:
                     ocrrecognizedfile.write(words["text"])
@@ -109,7 +111,10 @@ class SingleFileTranslator:
                     if not translatedtText is None:
                         translatedfile.write(translatedtText)
                         translatedfile.write('\n')
+                        pageVal.createOrAddToPageRow(words,translatedtText)
                         print('-----------English translation is %s' %translatedtText)
+            print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
+            pageVal.printValues()
 
 
         except Exception as e:

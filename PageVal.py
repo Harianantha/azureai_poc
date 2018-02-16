@@ -1,5 +1,7 @@
 from  PageRow import PageRow
 from  AzureLineResult import AzureLineResult
+from functools import reduce
+
 class PageVal:
     def __init__(self):
         self.pageRows = []
@@ -20,13 +22,21 @@ class PageVal:
             nppagerow.addToLine(azureLineResult,translatedtText)
             self.addpageRow(nppagerow)
         else:
+            '''
             tempMaxy=azureLineResult["boundingBox"][5]
             if(azureLineResult["boundingBox"][7] >  tempMaxy):
                 tempMaxy = azureLineResult["boundingBox"][7]
+            '''
+            minf = lambda a,b: a if (a < b) else b
+            minval = reduce(minf, [azureLineResult["boundingBox"][1],azureLineResult["boundingBox"][3],azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
+
             existingrow = 1
             selectedPageRow = None
             for pagerow in self.pageRows:
-                if(pagerow.maxY >= tempMaxy):
+                #if(pagerow.maxY >= tempMaxy):
+                ##If even the minimum is less than any rows maximum, then consider them to be in same row
+                if(pagerow.maxY >= minval):
+
                     #selectedPageRow = pagerow
                     pagerow.addToLine(azureLineResult,translatedtText)
                     #print("AFTER ADDING CONTENTS ARE")

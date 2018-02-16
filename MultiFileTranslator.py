@@ -72,12 +72,13 @@ class MultiFileTranslator:
                 splitfilelist = self.splitPdfToPNG(fileNameInput)
 
             millis = int(round(time.time() * 1000))
-            ocrrecognizedfileName=fileNameInput.replace(".","_")+str(millis)+"_ocrtext.doc"
-
+            ocrrecognizedfileName=fileNameInput.replace(".","_")+str(millis)+"_ocrtext.txt"
+            ocr_output_filename=ocrrecognizedfileName.replace(".txt","_cv_response.txt")
             translatedfileName=fileNameInput.replace(".","_")+str(millis)+"_engtranslation.pdf"
 
             ocrrecognizedfile=open(ocrrecognizedfileName,'a')
             translatedfile=open(translatedfileName,'a')
+            ocr_output_file=open(ocr_output_filename,'a')
 
             pagevallist = []
             print("After splitting the file")
@@ -108,22 +109,29 @@ class MultiFileTranslator:
 
                 # 'data' contains the JSON data. The following formats the JSON data for display.
                 parsed = json.loads(response.text)
-                print ("Response:")
-                print (json.dumps(parsed, sort_keys=True, indent=2))
+                #print ("Response:")
+                jsonoutput = json.dumps(parsed, sort_keys=True, indent=2)
+                #print (json.dumps(parsed, sort_keys=True, indent=2))
+                ocr_output_file.write("---NEXT PAGE--")
+                ocrrecognizedfile.write("---NEXT PAGE--")
+                ocrrecognizedfile.write('\n')
+                ocr_output_file.write(jsonoutput)
                 lines=parsed["recognitionResult"]["lines"]
                 print("Number of lines %s" %len(lines))
                 for words in lines:
-                    print(words["text"])
+                    #print(words["text"])
                     if not words["text"] is None:
                         ocrrecognizedfile.write(words["text"])
                         ocrrecognizedfile.write('\n')
                         translatedtText=self.translatetext(words["text"])
                         if not translatedtText is None:
-                            #translatedfile.write(translatedtText)
-                            #translatedfile.write('\n')
+                            ocrrecognizedfile.write('--Eng:--'+translatedtText)
+                            ocrrecognizedfile.write('\n')
                             pageVal.createOrAddToPageRow(words,translatedtText)
-                            print('-----------English translation is %s' %translatedtText)
+
+                            #print('-----------English translation is %s' %translatedtText)
                 pagevallist.append(pageVal)
+                print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
             createPdf= CreatePDFFile()
             createPdf.createTranslatedPDF(pagevallist,translatedfileName)
             return translatedfileName

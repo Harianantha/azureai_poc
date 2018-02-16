@@ -61,12 +61,14 @@ class SingleFileTranslator:
             image = open(argv,'rb').read() # Read image file in binary mode
             millis = int(round(time.time() * 1000))
 
-            ocrrecognizedfileName=argv.replace(".","_")+str(millis)+"_ocrtext.doc"
-
+            ocrrecognizedfileName=argv.replace(".","_")+str(millis)+"_ocrtext.txt"
+            ocr_output_filename=ocrrecognizedfileName.replace(".txt","_cv_response.txt")
             translatedfileName=argv.replace(".","_")+str(millis)+"_engtranslation.pdf"
+
 
             ocrrecognizedfile=open(ocrrecognizedfileName,'a')
             translatedfile=open(translatedfileName,'a')
+            ocr_output_file=open(ocr_output_filename,'a')
 
             # Execute the REST API call and get the response.
             print("After opening the file")
@@ -98,24 +100,27 @@ class SingleFileTranslator:
             # 'data' contains the JSON data. The following formats the JSON data for display.
             parsed = json.loads(response.text)
             print ("Response:")
-            print (json.dumps(parsed, sort_keys=True, indent=2))
+            jsonoutput = json.dumps(parsed, sort_keys=True, indent=2)
+            #print (json.dumps(parsed, sort_keys=True, indent=2))
+
+            ocr_output_file.write(jsonoutput)
             lines=parsed["recognitionResult"]["lines"]
             print("Number of lines %s" %len(lines))
             pageVal = PageVal()
             for words in lines:
 
-                print(words["text"])
+            #    print(words["text"])
                 if not words["text"] is None:
                     ocrrecognizedfile.write(words["text"])
                     ocrrecognizedfile.write('\n')
                     translatedtText=self.translatetext(words["text"])
                     if not translatedtText is None:
-                        #translatedfile.write(translatedtText)
-                        #translatedfile.write('\n')
+                        ocrrecognizedfile.write('--Eng:--'+translatedtText)
+                        ocrrecognizedfile.write('\n')
                         pageVal.createOrAddToPageRow(words,translatedtText)
-                        print('-----------English translation is %s' %translatedtText)
+
             print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
-            pageVal.printValues()
+            #pageVal.printValues()
             pagevallist = []
             pagevallist.append(pageVal)
             createPdf= CreatePDFFile()

@@ -29,13 +29,15 @@ class PageVal:
             '''
             minf = lambda a,b: a if (a < b) else b
             minval = reduce(minf, [azureLineResult["boundingBox"][1],azureLineResult["boundingBox"][3],azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
-
+            maxf = lambda a,b: a if (a < b) else b
+            maxval = reduce(maxf, [azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
             existingrow = 1
             selectedPageRow = None
             for pagerow in self.pageRows:
                 #if(pagerow.maxY >= tempMaxy):
                 ##If even the minimum is less than any rows maximum, then consider them to be in same row
-                if(pagerow.maxY >= minval):
+                #if(pagerow.maxY >= minval):
+                if(pagerow.maxY >= maxval):
 
                     #selectedPageRow = pagerow
                     pagerow.addToLine(azureLineResult,translatedtText)

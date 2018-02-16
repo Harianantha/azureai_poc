@@ -10,7 +10,7 @@ class CreatePDFFile:
         maxf = lambda a,b: a if (a > b) else b
         minf = lambda a,b: a if (a < b) else b
         pdf = fpdf.FPDF(unit = 'pt',format='Legal')
-        pdf.set_font("Arial", size=12)
+        pdf.set_font("Arial", size=5)
         for pageval in pagevals:
             maxxvals = []
             maxYVals = []
@@ -38,10 +38,10 @@ class CreatePDFFile:
                     heightToLeave = row.minY - lastY
                 #print("height to leave %s"  %heightToLeave)
                 if(heightToLeave < 15):
-                    print("Setting default height" )
+                #    print("Setting default height" )
                     heightToLeave =15
                 if(heightToLeave > 100):
-                    print("Restrciting maximum height" )
+                #    print("Restrciting maximum height" )
                     heightToLeave =100
                 pdf.ln(h = heightToLeave)
                 for lineResult in row.azureLineResults:
@@ -52,15 +52,20 @@ class CreatePDFFile:
                     maxval = reduce(maxf, [lineResult.boundingBoxValues[0],lineResult.boundingBoxValues[2],lineResult.boundingBoxValues[4],lineResult.boundingBoxValues[6]])
 
                     minval = reduce(minf, [lineResult.boundingBoxValues[0],lineResult.boundingBoxValues[2],lineResult.boundingBoxValues[4],lineResult.boundingBoxValues[6]])
-                    width = minval - lastXend
-                    #width = maxval -minval
-                    '''
+                    #width = minval - lastXend
+                    width = maxval -minval
+                    diff = minval - lastXend
                     if(width < 1):
                         width = 2
-                    pdf.cell(10)
-                    pdf.cell(0,  0,  lineResult.translatedValue, 0,  0)
+                    if(diff < 1):
+                        diff = 2
+                    #pdf.cell(diff)
+                    #pdf.cell(width,  0,  lineResult.translatedValue, 0,  0)
+
                     lastXend = maxval
-                    '''
+
+
+
                 if (row.maxY > lastY + 14):
 
                     lastY = row.maxY
@@ -79,7 +84,11 @@ class CreatePDFFile:
                 lineEnd =  row.lineEnd;
                 #pdf.ln(1)
             #    pdf.cell(space)
+                #pdf.multi_cell(0, 0,content, 0,'L')
                 pdf.cell(0,  0,  content, 0,  1)
+            #    pdf.write( content)
+        #        pdf.ln(h = '15')
+
                 #pdf.ln(5)
                 #pdf.write(row.lineStart,content)
 

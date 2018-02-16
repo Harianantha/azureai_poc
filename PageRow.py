@@ -8,6 +8,7 @@ class PageRow:
         self.maxY = 0
         self.lineEnd= 0
         self.lineStart = 0
+        self.maxX = 0
 
     #azureLineResults = []
     #minY = 0
@@ -23,6 +24,9 @@ class PageRow:
             minf = lambda a,b: a if (a < b) else b
             minval = reduce(minf, [azureLineResult["boundingBox"][1],azureLineResult["boundingBox"][3],azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
 
+            maxxtemp = reduce(maxf, [azureLineResult["boundingBox"][0],azureLineResult["boundingBox"][2],azureLineResult["boundingBox"][4],azureLineResult["boundingBox"][6],self.maxX])
+
+            self.maxX = maxxtemp
             if(self.lineEnd== 0):
 
                 self.lineEnd=azureLineResult["boundingBox"][2]

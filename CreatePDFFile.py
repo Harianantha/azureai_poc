@@ -10,7 +10,7 @@ class CreatePDFFile:
         maxf = lambda a,b: a if (a > b) else b
         minf = lambda a,b: a if (a < b) else b
         pdf = fpdf.FPDF(unit = 'pt',format='Legal')
-        pdf.set_font("Arial", size=5)
+        pdf.set_font("Arial", size=8)
         for pageval in pagevals:
             maxxvals = []
             maxYVals = []

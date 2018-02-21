@@ -41,7 +41,7 @@ class CreatePDFFile:
             for row in rowvals:
                 content = ''
                 lastXend = 0
-                print('In row %s' %rownum)
+               # print('In row %s' %rownum)
                 if (lastY == 0):
                     heightToLeave = 15
                 else:
@@ -53,7 +53,7 @@ class CreatePDFFile:
                 if(heightToLeave > 100):
                 #    print("Restrciting maximum height" )
                     heightToLeave =100
-                print('heightToLeave %s'%heightToLeave)
+             #   print('heightToLeave %s'%heightToLeave)
                 pdf.ln(h = heightToLeave)
 
                 lineresults = row.azureLineResults

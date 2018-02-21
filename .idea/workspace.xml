@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b30ea6a-c379-4ca6-adf3-d2fd2b29b8d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/AzureLineResult.py" afterPath="$PROJECT_DIR$/AzureLineResult.py" />
       <change beforePath="$PROJECT_DIR$/CreatePDFFile.py" afterPath="$PROJECT_DIR$/CreatePDFFile.py" />
+      <change beforePath="$PROJECT_DIR$/HandleOCR.py" afterPath="$PROJECT_DIR$/HandleOCR.py" />
       <change beforePath="$PROJECT_DIR$/MultiFileTranslator.py" afterPath="$PROJECT_DIR$/MultiFileTranslator.py" />
-      <change beforePath="$PROJECT_DIR$/PageRow.py" afterPath="$PROJECT_DIR$/PageRow.py" />
-      <change beforePath="$PROJECT_DIR$/PageVal.py" afterPath="$PROJECT_DIR$/PageVal.py" />
-      <change beforePath="$PROJECT_DIR$/SingleFileTranslator.py" afterPath="$PROJECT_DIR$/SingleFileTranslator.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/PageVal.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="32" column="54" lean-forward="true" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+              <caret line="32" column="54" lean-forward="false" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -45,8 +40,8 @@
       <file leaf-file-name="MultiFileTranslator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MultiFileTranslator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="28" column="98" lean-forward="false" selection-start-line="28" selection-start-column="85" selection-end-line="28" selection-end-column="98" />
+            <state relative-caret-position="-1834">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#0#126#0" expanded="true" />
               </folding>
@@ -54,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HandleOCR.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HandleOCR.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HandleOCR.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="97" column="86" lean-forward="false" selection-start-line="97" selection-start-column="83" selection-end-line="97" selection-end-column="86" />
+            <state relative-caret-position="474">
+              <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
               <folding>
                 <element signature="e#0#117#0" expanded="true" />
               </folding>
@@ -113,8 +108,8 @@
       <file leaf-file-name="SingleFileTranslator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SingleFileTranslator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="123" column="45" lean-forward="false" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="45" />
+            <state relative-caret-position="51">
+              <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="31" />
               <folding>
                 <element signature="e#0#123#0" expanded="true" />
               </folding>
@@ -122,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreatePDFFile.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreatePDFFile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CreatePDFFile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="85" column="163" lean-forward="false" selection-start-line="85" selection-start-column="163" selection-end-line="85" selection-end-column="163" />
+            <state relative-caret-position="244">
+              <caret line="43" column="16" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -164,6 +159,7 @@
       <find>maxval</find>
       <find>lineval</find>
       <find>unifontsubset</find>
+      <find>rownum</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,14 +173,14 @@
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/startcmd.py" />
         <option value="$PROJECT_DIR$/startcmd.py" />
-        <option value="$PROJECT_DIR$/MultiFileTranslator.py" />
         <option value="$PROJECT_DIR$/OCRResponseWord.py" />
-        <option value="$PROJECT_DIR$/HandleOCR.py" />
         <option value="$PROJECT_DIR$/SingleFileTranslator.py" />
         <option value="$PROJECT_DIR$/PageVal.py" />
         <option value="$PROJECT_DIR$/PageRow.py" />
         <option value="$PROJECT_DIR$/AzureLineResult.py" />
+        <option value="$PROJECT_DIR$/MultiFileTranslator.py" />
         <option value="$PROJECT_DIR$/CreatePDFFile.py" />
+        <option value="$PROJECT_DIR$/HandleOCR.py" />
       </list>
     </option>
   </component>
@@ -758,16 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SingleFileTranslator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="123" column="45" lean-forward="false" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/startcmd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -784,32 +770,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MultiFileTranslator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="28" column="98" lean-forward="false" selection-start-line="28" selection-start-column="85" selection-end-line="28" selection-end-column="98" />
-          <folding>
-            <element signature="e#0#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PageVal.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="32" column="54" lean-forward="true" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <caret line="32" column="54" lean-forward="false" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HandleOCR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="97" column="86" lean-forward="false" selection-start-line="97" selection-start-column="83" selection-end-line="97" selection-end-column="86" />
-          <folding>
-            <element signature="e#0#117#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -832,11 +798,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SingleFileTranslator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CreatePDFFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="85" column="163" lean-forward="false" selection-start-line="85" selection-start-column="163" selection-end-line="85" selection-end-column="163" />
+        <state relative-caret-position="244">
+          <caret line="43" column="16" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MultiFileTranslator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1834">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HandleOCR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#117#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -2,6 +2,7 @@ import requests,http.client, urllib.request, urllib.parse, urllib.error, base64,
 from PIL import Image
 from  PageVal import PageVal
 from CreatePDFFile import CreatePDFFile
+from HandleOCR import HandleOCR
 
 class MultiFileTranslator:
     ###############################################
@@ -130,6 +131,9 @@ class MultiFileTranslator:
                             pageVal.createOrAddToPageRow(words,translatedtText,'HW')
 
                             #print('-----------English translation is %s' %translatedtText)
+                handleocr = HandleOCR()
+                handleocr.translateImage(fileNameInput, pageVal)
+
                 pagevallist.append(pageVal)
                 print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
             createPdf= CreatePDFFile()

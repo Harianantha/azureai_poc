@@ -1,6 +1,8 @@
 import requests,http.client, urllib.request, urllib.parse, urllib.error, base64, json,time,xml.etree.ElementTree as ET,time
 from  PageVal import PageVal
 from CreatePDFFile import CreatePDFFile
+from HandleOCR import HandleOCR
+
 class SingleFileTranslator:
     ###############################################
     #### Update or verify the following values. ###
@@ -61,8 +63,8 @@ class SingleFileTranslator:
             image = open(argv,'rb').read() # Read image file in binary mode
             millis = int(round(time.time() * 1000))
 
-            ocrrecognizedfileName=argv.replace(".","_")+str(millis)+"_ocrtext.txt"
-            ocr_output_filename=ocrrecognizedfileName.replace(".txt","_cv_response.txt")
+            ocrrecognizedfileName=argv.replace(".","_")+str(millis)+"_HW_translationtext.txt"
+            ocr_output_filename=ocrrecognizedfileName.replace(".txt","_handwritten_response.txt")
             translatedfileName=argv.replace(".","_")+str(millis)+"_engtranslation.pdf"
 
 
@@ -117,12 +119,20 @@ class SingleFileTranslator:
                     if not translatedtText is None:
                         ocrrecognizedfile.write('--Eng:--'+translatedtText)
                         ocrrecognizedfile.write('\n')
-                        pageVal.createOrAddToPageRow(words,translatedtText)
+                        pageVal.createOrAddToPageRow(words,translatedtText,'HW')
 
-            print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))
-            #pageVal.printValues()
+            print ('Number of ROWS in pageVal %s--PAGE VAL IS'%len(pageVal.pageRows) )
+            pageVal.printValues()
             pagevallist = []
+
+            handleocr = HandleOCR()
+            handleocr.translateImage(argv,pageVal)
+
             pagevallist.append(pageVal)
+
+            print ('Number of ROWS in pageVal %s--PAGE VAL IS  '% len(pageVal.pageRows))
+            pageVal.printValues()
+            print ('Before creating PDF')
             createPdf= CreatePDFFile()
             createPdf.createTranslatedPDF(pagevallist,translatedfileName)
 

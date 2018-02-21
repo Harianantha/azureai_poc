@@ -1,6 +1,7 @@
 from  PageRow import PageRow
 from  AzureLineResult import AzureLineResult
 from functools import reduce
+from OCRResponseWord import OCRResponseWord
 
 class PageVal:
     def __init__(self):
@@ -15,11 +16,17 @@ class PageVal:
         updatedList = self.pageRows.append(pagerow)
         #self.pageRows = updatedList
 
-    def createOrAddToPageRow(self,azureLineResult,translatedtText):
-        #print('In createOrAddToPageRow.Line text is%s'%azureLineResult["text"])
+    def createOrAddToPageRow(self,azureLineResult,translatedtText,sourceval):
+        '''
+        if(sourceval == 'HW'):
+            print('In createOrAddToPageRow.Line text is%s'%azureLineResult["text"])
+        else:
+            print('In createOrAddToPageRow.Line bounding box is%s' % azureLineResult.boundingBox)
+            print('In createOrAddToPageRow.Txt is%s' % azureLineResult.text)
+        '''
         if (len(self.pageRows) == 0):
             nppagerow = PageRow()
-            nppagerow.addToLine(azureLineResult,translatedtText)
+            nppagerow.addToLine(azureLineResult,translatedtText,sourceval)
             self.addpageRow(nppagerow)
         else:
             '''
@@ -28,19 +35,30 @@ class PageVal:
                 tempMaxy = azureLineResult["boundingBox"][7]
             '''
             minf = lambda a,b: a if (a < b) else b
-            minval = reduce(minf, [azureLineResult["boundingBox"][1],azureLineResult["boundingBox"][3],azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
+
+            minval = 0
+            if(sourceval == 'HW'):
+                minval = reduce(minf, [azureLineResult["boundingBox"][1],azureLineResult["boundingBox"][3],azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
+            else :
+                minval = reduce(minf, [azureLineResult.boundingBox[1], azureLineResult.boundingBox[3],azureLineResult.boundingBox[5], azureLineResult.boundingBox[7]])
             maxf = lambda a,b: a if (a < b) else b
-            maxval = reduce(maxf, [azureLineResult["boundingBox"][5],azureLineResult["boundingBox"][7]])
+
+            maxval = 0
+            if (sourceval == 'HW'):
+                maxval = reduce(maxf, [azureLineResult["boundingBox"][5], azureLineResult["boundingBox"][7]])
+            else:
+                maxval = reduce(maxf, [azureLineResult.boundingBox[5], azureLineResult.boundingBox[7]])
+
             existingrow = 1
             selectedPageRow = None
             for pagerow in self.pageRows:
                 #if(pagerow.maxY >= tempMaxy):
                 ##If even the minimum is less than any rows maximum, then consider them to be in same row
                 #if(pagerow.maxY >= minval):
-                if(pagerow.maxY >= maxval):
+                if(pagerow.maxY >= maxval ):
 
                     #selectedPageRow = pagerow
-                    pagerow.addToLine(azureLineResult,translatedtText)
+                    pagerow.addToLine(azureLineResult,translatedtText,sourceval)
                     #print("AFTER ADDING CONTENTS ARE")
                     existingrow = 0
                     #for result in  pagerow.azureLineResults:
@@ -50,7 +68,7 @@ class PageVal:
             #print ('existingrow %s' %existingrow)
             if (existingrow == 1):
                 newpagerow=PageRow()
-                newpagerow.addToLine(azureLineResult,translatedtText)
+                newpagerow.addToLine(azureLineResult,translatedtText,sourceval)
                 self.addpageRow(newpagerow)
 #            else:
 #                selectedPageRow.addToLine(azureLineResult)

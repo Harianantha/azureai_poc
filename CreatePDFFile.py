@@ -3,6 +3,8 @@ from  PageVal import PageVal
 from  PageRow import PageRow
 from  AzureLineResult import AzureLineResult
 from functools import reduce
+from OCRResponseWord import OCRResponseWord
+
 class CreatePDFFile:
 
 
@@ -10,7 +12,11 @@ class CreatePDFFile:
         maxf = lambda a,b: a if (a > b) else b
         minf = lambda a,b: a if (a < b) else b
         pdf = fpdf.FPDF(unit = 'pt',format='Legal')
-        pdf.set_font("Arial", size=8)
+        pdf.add_font('DejaVuSansCondensed', '', 'DejaVuSansCondensed_0.ttf', uni=True)
+      #  pdf.set_font("DejaVu", size=8)
+       # pdf.add_font("Cambria", uni = True)
+        pdf.set_font("DejaVuSansCondensed", size=8)
+
         for pageval in pagevals:
             maxxvals = []
             maxYVals = []
@@ -28,10 +34,14 @@ class CreatePDFFile:
             space = 0
             #pageRowEntries = pageval.pageRows
             lastY = 0
-            for row in pageval.pageRows:
+            rownum =1
+            rowvals = pageval.pageRows
+            rowvals.sort(key=lambda rowval: rowval.minY)
+            #for row in pageval.pageRows:
+            for row in rowvals:
                 content = ''
                 lastXend = 0
-
+                print('In row %s' %rownum)
                 if (lastY == 0):
                     heightToLeave = 15
                 else:
@@ -43,11 +53,58 @@ class CreatePDFFile:
                 if(heightToLeave > 100):
                 #    print("Restrciting maximum height" )
                     heightToLeave =100
+                print('heightToLeave %s'%heightToLeave)
                 pdf.ln(h = heightToLeave)
-                for lineResult in row.azureLineResults:
+
+                lineresults = row.azureLineResults
+                '''
+                print('lineresults count IS%s' % lineresults.count)
+                uniquevalset=set(lineresults)
+              #  print('SET IS%s'%uniquevalset)
+
+                uniquevals = list(uniquevalset)
+               # print('LIST IS%s' %uniquevals)
+                print('LIST count IS%s' % uniquevals.count)
+                uniquevals.sort(key=lambda uniqueval:uniqueval.minxval)
+                '''
+                lstHWlist= list(filter(lambda result: result.recognitionsource == 'HW' , lineresults))
+                listOCRlist = list(filter(lambda result: result.recognitionsource == 'OCR' , lineresults))
+
+                deltaocrlist = []
+
+                for ocrResult in listOCRlist:
+                    addToList = True
+                    for hwlist in lstHWlist:
+                        startxdiff = ocrResult.boundingBoxValues[0] - hwlist.boundingBoxValues[0]
+                        startydiff = ocrResult.boundingBoxValues[1] - hwlist.boundingBoxValues[1]
+                        endxdiff = ocrResult.boundingBoxValues[6] - hwlist.boundingBoxValues[6]
+                        endydiff = ocrResult.boundingBoxValues[7] - hwlist.boundingBoxValues[7]
+                        #print('STARTXDIFF %s' % startxdiff)
+                        #print('startydiff %s' % startydiff)
+                        #print('endxdiff %s' % endxdiff)
+                        #print('endydiff %s' % endydiff)
+                        if ((abs(startxdiff) < 11 and abs(startydiff) < 11 and abs(endxdiff) < 11 and abs(endydiff) < 11) or (ocrResult.textVal in hwlist.textVal)):
+                            addToList = False
+                            break
+                    if addToList:
+                        deltaocrlist.append(ocrResult)
+
+                lstHWlist.extend(deltaocrlist)
+
+                lstHWlist.sort(key=lambda listentry: listentry.minxval)
+                #for lineResult in row.azureLineResults:
+                for lineResult in lstHWlist:
                     #gap = boundingBoxValues["boundingBox"][0] - lastXend
                     #pdf.cell(gap)
-                    content = content +" " +lineResult.translatedValue
+                    if (lineResult is None):
+                        print ('Line Result is None')
+                    if not lineResult.translatedValue is None:
+
+                        content = content +" " +lineResult.translatedValue
+
+                    valuestocompare = []
+
+
 
                     maxval = reduce(maxf, [lineResult.boundingBoxValues[0],lineResult.boundingBoxValues[2],lineResult.boundingBoxValues[4],lineResult.boundingBoxValues[6]])
 
@@ -92,6 +149,6 @@ class CreatePDFFile:
                 #pdf.ln(5)
                 #pdf.write(row.lineStart,content)
 
-
+                rownum= rownum+1
 
         pdf.output(fileName)

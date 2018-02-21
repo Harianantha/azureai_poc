@@ -127,7 +127,7 @@ class MultiFileTranslator:
                         if not translatedtText is None:
                             ocrrecognizedfile.write('--Eng:--'+translatedtText)
                             ocrrecognizedfile.write('\n')
-                            pageVal.createOrAddToPageRow(words,translatedtText)
+                            pageVal.createOrAddToPageRow(words,translatedtText,'HW')
 
                             #print('-----------English translation is %s' %translatedtText)
                 pagevallist.append(pageVal)

@@ -14,7 +14,7 @@ class translateImage:
             return outputfile
         #PDF, DOCX,JPEG/PNG
         elif (fileName. endswith ('.docx')):
-            command ='C:\Techolution\IOTPractise\CustomerProjects\Axa\DocumentTranslator\executeDocumentTranslator.bat '+fileName
+            command ='C:\Axa\executeDocumentTranslator.bat '+fileName
             output = os.system(command)
             if (output == 0):
                 outputfilename=fileName.replace(".docx",".en.docx")

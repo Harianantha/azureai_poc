@@ -28,7 +28,8 @@ class SingleFileTranslator:
     # a free trial subscription key, you should not need to change this region.
     #uri_base = 'westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr'
     uri_base = 'westcentralus.api.cognitive.microsoft.com'
-    handwritten_uri = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
+    #handwritten_uri = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
+    handwritten_uri = 'https://eastus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
 
     headers = {
         # Request headers.

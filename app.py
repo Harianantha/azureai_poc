@@ -5,16 +5,18 @@ from SingleFileTranslator import SingleFileTranslator
 
 from translateImage import translateImage
 from flask import Flask, request, render_template, send_from_directory, send_file
+from flask_cors import CORS
 
 __author__ = 'kranthi'
 
 app = Flask(__name__)
-
+CORS(app)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 @app.route("/")
 def index():
+
     return render_template("upload.html")
 
 
@@ -27,7 +29,7 @@ def upload():
     if os.path.isdir(os.path.join(APP_ROOT, 'files/{}'.format(folder_name))):
         print("folder exist")
     '''
-    target = os.path.join(APP_ROOT, 'files/{}'.format(''))
+    target = os.path.join(APP_ROOT, 'static/files/{}'.format(''))
     print(target)
     if not os.path.isdir(target):
         os.mkdir(target)
@@ -57,7 +59,13 @@ def upload():
         translateImageObj=translateImage()
         outputfile = translateImageObj.gettranslateImage(destination)
     #return outputfile
-    return send_file(outputfile, as_attachment=True,mimetype='application/pdf')
+    print('Got outputfile %s' %outputfile)
+    pos=outputfile.find('\static')
+    print('Position is %s' % pos)
+    outputpath= outputfile[pos:]
+    print('Returning path%s' %outputpath)
+    return outputpath
+    #return send_file(outputfile, as_attachment=True,mimetype='application/pdf')
 
 
 
@@ -74,4 +82,4 @@ def get_gallery():
 
 
 if __name__ == "__main__":
-    app.run(port=80, debug=True ,host ='0.0.0.0')
+    app.run(port=80, debug=True ,host ='0.0.0.0',threaded=True)

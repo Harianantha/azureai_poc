@@ -56,8 +56,8 @@ def upload():
         '''
         translateImageObj=translateImage()
         outputfile = translateImageObj.gettranslateImage(destination)
-    return outputfile
-    #return send_file(outputfile, as_attachment=True,mimetype='application/pdf')
+    #return outputfile
+    return send_file(outputfile, as_attachment=True,mimetype='application/pdf')
 
 
 

@@ -78,3 +78,12 @@ nav ul h3 {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.spinner_css {
+    margin: auto;
+    left: 0;
+    top: 50%;
+    right: 0;
+    position: fixed;
+    margin-top: -50px;
+}

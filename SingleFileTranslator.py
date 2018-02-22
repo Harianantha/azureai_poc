@@ -9,8 +9,10 @@ class SingleFileTranslator:
     ###############################################
 
     # Replace the subscription_key string value with your valid subscription key.
-    subscription_key = 'b4ded92110f0496494aaa9e016e6a48e'
-    translation_subscription_key='7d5a83b4afff4ab9aae93122a4f28d83'
+    # subscription_key = 'b4ded92110f0496494aaa9e016e6a48e'
+    subscription_key = '1afca1f57e954b318058e0311e2c1e18'
+    # translation_subscription_key='7d5a83b4afff4ab9aae93122a4f28d83'
+    translation_subscription_key = '5074b07cfe9f408392534c166eb1222b'
 
     translation_host = 'api.microsofttranslator.com'
     translation_path = '/V2/Http.svc/Translate'

@@ -10,8 +10,10 @@ class MultiFileTranslator:
     ###############################################
 
     # Replace the subscription_key string value with your valid subscription key.
-    subscription_key = 'b4ded92110f0496494aaa9e016e6a48e'
-    translation_subscription_key='7d5a83b4afff4ab9aae93122a4f28d83'
+    #subscription_key = 'b4ded92110f0496494aaa9e016e6a48e'
+    subscription_key = '1afca1f57e954b318058e0311e2c1e18'
+    #translation_subscription_key='7d5a83b4afff4ab9aae93122a4f28d83'
+    translation_subscription_key = '5074b07cfe9f408392534c166eb1222b'
 
     translation_host = 'api.microsofttranslator.com'
     translation_path = '/V2/Http.svc/Translate'
@@ -27,7 +29,8 @@ class MultiFileTranslator:
     # a free trial subscription key, you should not need to change this region.
     #uri_base = 'westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr'
     uri_base = 'westcentralus.api.cognitive.microsoft.com'
-    handwritten_uri = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
+    #handwritten_uri = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
+    handwritten_uri = 'https://eastus.api.cognitive.microsoft.com/vision/v1.0/RecognizeText'
 
     headers = {
         # Request headers.
@@ -132,7 +135,7 @@ class MultiFileTranslator:
 
                             #print('-----------English translation is %s' %translatedtText)
                 handleocr = HandleOCR()
-                handleocr.translateImage(fileNameInput, pageVal)
+                handleocr.translateImage(filename, pageVal)
 
                 pagevallist.append(pageVal)
                 print ('Number of ROWS in pageVal %s'%len(pageVal.pageRows))

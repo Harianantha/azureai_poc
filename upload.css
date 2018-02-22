@@ -1,0 +1,80 @@
+body {
+    font-family: "Source-Sans-Pro", Arial, sans-serif;
+}
+
+.nav-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.logo_text {
+    padding-left: 46px !important;
+    padding-top: 11px;
+}
+
+.line_height_0 {
+    line-height: 0!important;
+}
+
+.bg_header {
+    background-color: #fff;
+}
+
+nav ul a,
+nav ul h3 {
+    color: #37588b !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.axa_logo {
+    width: 42px;
+}
+
+.microsoft_logo {
+    width: 70px;
+}
+
+.techolution_logo {
+    width: 90px;
+}
+
+.h_100 {
+    height: 100%;
+}
+
+.mt_5 {
+    margin-top: 5px;
+}
+
+.right_logos li {
+    line-height: 64px;
+}
+
+.download_box {
+    padding: 8px!important;
+}
+
+.download_box a i {
+    color: #37588b;
+}
+
+.box .heading {
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.box .note {
+    font-size: 12px;
+    color: red;
+    text-align: right;
+}
+
+.translated_box .heading {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

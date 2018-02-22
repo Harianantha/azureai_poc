@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="upload.css">
+    <script src="./dist/dropzone.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dist/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="./dist/basic.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="bg_header">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">
+                <img src="./logos/axa.logo.jpg" class="axa_logo">
+            </a>
+            <ul id="nav-mobile" class="left logo_text">
+                <li>
+                    <h3>AXA Document Translation Enhancer</h3>
+                </li>
+            </ul>
+            <ul id="nav-mobile" class="right line_height_0 right_logos">
+                <li>
+
+                    <img src="./logos/cognitive.png" class="microsoft_logo">
+
+                </li>
+                <li>
+
+                    <img src="./logos/techolution.png" class="techolution_logo">
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="mt_5 container">
+        <div class="row ">
+            <div class="box">
+                <p class="heading">Upload file</p>
+
+                <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                </form>
+                <p class="note">* It will accept only .png, txt, .jpeg</p>
+            </div>
+        </div>
+        <div class="row translated_box">
+            <!-- Teal page content  -->
+            <div class="col s6">
+                <p class="heading">Translated file</p>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="http://via.placeholder.com/350x150">
+                    </div>
+                    <div class="card-action download_box">
+                        <a href="#" class=""><i class=" material-icons right">file_download</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>
